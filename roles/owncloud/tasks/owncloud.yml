@@ -44,5 +44,18 @@
   command: a2ensite owncloud creates=/etc/apache2/sites-enabled/owncloud
   notify: restart apache
 
+- name: Configure the Apache HTTP server for the gifs folder
+  template: src=etc_apache2_sites-available_gifs.j2 dest=/etc/apache2/sites-available/gifs group=www-data owner=www-data
+  notify: restart apache
+
+- name: Check if gifs directory exists
+  stat: path=/var/www/owncloud/data/{{main_user_name}}/gifs
+  register: check_gifs_path
+
+- name: Enable the gifs site if there is a gifs folder
+  command: a2ensite gifs creates=/etc/apache2/sites-enabled/gifs
+  notify: restart apache
+  when: check_gifs_path.stat.exists
+
 - name: Install ownCloud cronjob
   cron: name="ownCloud" user="www-data" minute="*/5" job="php -f /var/www/owncloud/cron.php > /dev/null"
