@@ -52,6 +52,10 @@ smtpd_sasl_auth_enable = yes
 broken_sasl_auth_clients = yes
 smtpd_sasl_security_options = noanonymous
 
+# set to empty value for backwards compatibility
+# as per http://www.postfix.org/postconf.5.html#smtpd_relay_restrictions
+smtpd_relay_restrictions =
+
 smtpd_recipient_restrictions =
   permit_sasl_authenticated,
   permit_mynetworks,
@@ -106,7 +110,6 @@ postscreen_dnsbl_sites =
   bl.spamcop.net*2
   dnsbl.sorbs.net*1
   spam.spamrats.com*2
-  dnsbl.ahbl.org*2
 postscreen_dnsbl_threshold = 3
 postscreen_dnsbl_action = enforce
 postscreen_greet_action = enforce

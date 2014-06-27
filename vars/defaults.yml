@@ -27,6 +27,12 @@ ntp_servers:
   # - 2.north-america.pool.ntp.org
   # - 3.north-america.pool.ntp.org
 
+# collectd
+collectd_version: 5.4.1
+collectd_librato_version: 0.0.10
+collectd_librato_email: "" # (optional)
+collectd_librato_api_token: "" # (optional)
+
 # google authenticator
 google_auth_version: 1.0
 
@@ -100,3 +106,19 @@ selfoss_domain: "news.{{ domain }}"
 selfoss_db_username: selfoss
 # selfoss_db_password: (required)
 selfoss_db_database: selfoss
+
+# git
+cgit_version: 0.10.1
+cgit_domain: "git.{{ domain }}"
+gitolite_version: 3.5.3.1
+
+# newebe
+newebe_domain: "newebe.{{ domain }}"
+
+# wallabag
+wallabag_version: 1.6.1b
+wallabag_domain: "read.{{ domain }}"
+# wallabag_salt: (required)
+wallabag_db_username: wallabag
+# wallabag_db_password: (required)
+wallabag_db_database: wallabag

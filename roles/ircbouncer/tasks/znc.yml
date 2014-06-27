@@ -39,7 +39,7 @@
     /var/lib/znc/znc.pem creates=/var/lib/znc/znc.pem
 
 - name: Ensure znc user and group can read cert
-  file: path=/var/lib/znc/znc.pem group=znc owner=znc
+  file: path=/var/lib/znc/znc.pem group=znc owner=znc mode=640
 
 - name: Check for existing config file
   command: cat /var/lib/znc/configs/znc.conf
@@ -53,6 +53,9 @@
 - name: Copy znc configuration file into place
   template: src=var_lib_znc_configs_znc.conf.j2 dest=/var/lib/znc/configs/znc.conf owner=znc group=znc
   when: znc_config.rc != 0
+
+- name: Set firewall rule for znc
+  ufw: rule=allow port=6697 proto=tcp
 
 - name: Ensure znc is a system service
   service: name=znc state=started enabled=true
